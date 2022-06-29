@@ -1,7 +1,5 @@
 import 'dart:typed_data';
-import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_painter/flutter_painter.dart';
 
@@ -20,7 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Flutter Painter Example",
       theme: ThemeData(
-          primaryColor: Colors.brown, accentColor: Colors.amberAccent),
+        primaryColor: Colors.brown,
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: Colors.amberAccent),
+      ),
       home: const FlutterPainterExample(),
     );
   }
@@ -397,7 +398,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                 icon: Icon(
                   PhosphorIcons.eraser,
                   color: controller.freeStyleMode == FreeStyleMode.erase
-                      ? Theme.of(context).accentColor
+                      ? Theme.of(context).colorScheme.secondary
                       : null,
                 ),
                 onPressed: toggleFreeStyleErase,
@@ -407,7 +408,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                 icon: Icon(
                   PhosphorIcons.scribbleLoop,
                   color: controller.freeStyleMode == FreeStyleMode.draw
-                      ? Theme.of(context).accentColor
+                      ? Theme.of(context).colorScheme.secondary
                       : null,
                 ),
                 onPressed: toggleFreeStyleDraw,
@@ -417,7 +418,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                 icon: Icon(
                   PhosphorIcons.textT,
                   color: textFocusNode.hasFocus
-                      ? Theme.of(context).accentColor
+                      ? Theme.of(context).colorScheme.secondary
                       : null,
                 ),
                 onPressed: addText,
@@ -460,7 +461,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     child: Icon(
                       getShapeIcon(controller.shapeFactory),
                       color: controller.shapeFactory != null
-                          ? Theme.of(context).accentColor
+                          ? Theme.of(context).colorScheme.secondary
                           : null,
                     ),
                   ),
@@ -469,7 +470,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                 IconButton(
                   icon: Icon(
                     getShapeIcon(controller.shapeFactory),
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   onPressed: () => selectShape(null),
                 ),
