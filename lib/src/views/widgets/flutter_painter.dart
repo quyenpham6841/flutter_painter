@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import '../../controllers/events/selected_object_drawable_removed_event.dart';
 import '../../controllers/helpers/renderer_check/renderer_check.dart';
 import '../../controllers/drawables/drawable.dart';
@@ -151,6 +149,7 @@ class _FlutterPainterWidget extends StatelessWidget {
             opaque: false,
             pageBuilder: (context, animation, secondaryAnimation) {
               final controller = PainterController.of(context);
+              FreeStyleMode currentMode = controller.freeStyleMode;
               return NotificationListener<FlutterPainterNotification>(
                 onNotification: onNotification,
                 child: InteractiveViewer(
@@ -163,7 +162,23 @@ class _FlutterPainterWidget extends StatelessWidget {
                       : 1,
                   panEnabled: controller.settings.scale.enabled &&
                       (controller.freeStyleSettings.mode == FreeStyleMode.none),
-                  scaleEnabled: controller.settings.scale.enabled,
+                  scaleEnabled: controller.settings.scale.enabled &&
+                      (controller.freeStyleSettings.mode == FreeStyleMode.none),
+                  onInteractionStart: (details) {
+                    controller.freeStyleMode = FreeStyleMode.none;
+                  },
+                  onInteractionEnd: (details) {
+                    switch (currentMode) {
+                      case FreeStyleMode.none:
+                        break;
+                      case FreeStyleMode.draw:
+                        controller.freeStyleMode = FreeStyleMode.draw;
+                        break;
+                      case FreeStyleMode.erase:
+                        controller.freeStyleMode = FreeStyleMode.erase;
+                        break;
+                    }
+                  },
                   child: _FreeStyleWidget(
                       // controller: controller,
                       child: _TextWidget(
