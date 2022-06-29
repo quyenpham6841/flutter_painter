@@ -140,16 +140,15 @@ class _FlutterPainterWidget extends StatelessWidget {
       this.onSelectedObjectDrawableChanged,
       this.onPainterSettingsChanged})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    FreeStyleMode currentMode = controller.freeStyleMode;
     return Navigator(
         onGenerateRoute: (settings) => PageRouteBuilder(
             settings: settings,
             opaque: false,
             pageBuilder: (context, animation, secondaryAnimation) {
               final controller = PainterController.of(context);
-              FreeStyleMode currentMode = controller.freeStyleMode;
               return NotificationListener<FlutterPainterNotification>(
                 onNotification: onNotification,
                 child: InteractiveViewer(
