@@ -11,7 +11,7 @@ class TextSettings {
   ///
   /// If a node is not provided, one will be used by default.
   /// However, you won't be able to listen to changes in user input focus.
-  final FocusNode? focusNode;
+  final FocusNode focusNode;
 
   /// Creates a [TextSettings] with the given [textStyle] and [focusNode].
   const TextSettings({
@@ -23,7 +23,7 @@ class TextSettings {
   });
 
   /// Creates a copy of this but with the given fields replaced with the new values.
-  TextSettings copyWith({TextStyle? textStyle, FocusNode? focusNode}) {
+  TextSettings copyWith({TextStyle textStyle, FocusNode focusNode}) {
     return TextSettings(
         textStyle: textStyle ?? this.textStyle,
         focusNode: focusNode ?? this.focusNode);

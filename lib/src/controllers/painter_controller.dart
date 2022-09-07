@@ -54,8 +54,8 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// Without it, the background will be transparent.
   PainterController({
     PainterSettings settings = const PainterSettings(),
-    List<Drawable>? drawables = const [],
-    BackgroundDrawable? background,
+    List<Drawable> drawables = const [],
+    BackgroundDrawable background,
   }) : this.fromValue(PainterControllerValue(
             settings: settings,
             drawables: drawables ?? const [],
@@ -78,7 +78,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this value should only be set between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  set background(BackgroundDrawable? background) =>
+  set background(BackgroundDrawable background) =>
       value = value.copyWith(background: background);
 
   /// Queues used to track the actions performed on drawables in the controller.
@@ -283,15 +283,14 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// ```dart
   /// void initState(){
   ///   super.initState();
-  ///   WidgetsBinding.instance?.addPostFrameCallback((timestamp){
+  ///   WidgetsBinding.instance.addPostFrameCallback((timestamp){
   ///     controller.addImage(myImage);
   ///   });
   /// }
   /// ```
-  void addImage(ui.Image image, [Size? size]) {
+  void addImage(ui.Image image, [Size size]) {
     // Calculate the center of the painter
-    final renderBox =
-        painterKey.currentContext?.findRenderObject() as RenderBox?;
+    final renderBox = painterKey.currentContext.findRenderObject() as RenderBox;
     final center = renderBox == null
         ? Offset.zero
         : Offset(
@@ -299,7 +298,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
             renderBox.size.height / 2,
           );
 
-    final ImageDrawable drawable;
+    ImageDrawable drawable;
 
     if (size == null) {
       drawable = ImageDrawable(image: image, position: center);
@@ -320,7 +319,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
     final canvas = Canvas(recorder);
     final painter = Painter(
       drawables: value.drawables,
-      scale: painterKey.currentContext?.size ?? size,
+      scale: painterKey.currentContext.size ?? size,
       background: value.background,
     );
     painter.paint(canvas, size);
@@ -330,7 +329,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   }
 
   /// The currently selected object drawable.
-  ObjectDrawable? get selectedObjectDrawable => value.selectedObjectDrawable;
+  ObjectDrawable get selectedObjectDrawable => value.selectedObjectDrawable;
 
   /// Selects an object drawable from the list of drawables.
   ///
@@ -341,7 +340,7 @@ class PainterController extends ValueNotifier<PainterControllerValue> {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this method should only be called between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  void selectObjectDrawable(ObjectDrawable? drawable) {
+  void selectObjectDrawable(ObjectDrawable drawable) {
     if (drawable == value.selectedObjectDrawable) return;
     if (drawable != null && !value.drawables.contains(drawable)) return;
     value = value.copyWith(
@@ -380,16 +379,16 @@ class PainterControllerValue {
   final List<Drawable> _drawables;
 
   /// The current background drawable of the widget.
-  final BackgroundDrawable? background;
+  final BackgroundDrawable background;
 
   /// The currently selected object drawable.
-  final ObjectDrawable? selectedObjectDrawable;
+  final ObjectDrawable selectedObjectDrawable;
 
   /// Creates a new [PainterControllerValue] with the provided [settings] and [background].
   ///
   /// The user can pass a list of initial [drawables] which will be drawn without user interaction.
   const PainterControllerValue({
-    required this.settings,
+    this.settings,
     List<Drawable> drawables = const [],
     this.background,
     this.selectedObjectDrawable,
@@ -402,11 +401,11 @@ class PainterControllerValue {
 
   /// Creates a copy of this value but with the given fields replaced with the new values.
   PainterControllerValue copyWith({
-    PainterSettings? settings,
-    List<Drawable>? drawables,
-    BackgroundDrawable? background =
+    PainterSettings settings,
+    List<Drawable> drawables,
+    BackgroundDrawable background =
         _NoBackgroundPassedBackgroundDrawable.instance,
-    ObjectDrawable? selectedObjectDrawable =
+    ObjectDrawable selectedObjectDrawable =
         _NoObjectPassedBackgroundDrawable.instance,
   }) {
     return PainterControllerValue(
@@ -470,12 +469,12 @@ class _NoObjectPassedBackgroundDrawable extends ObjectDrawable {
 
   @override
   ObjectDrawable copyWith(
-      {bool? hidden,
-      Set<ObjectDrawableAssist>? assists,
-      ui.Offset? position,
-      double? rotation,
-      double? scale,
-      bool? locked}) {
+      {bool hidden,
+      Set<ObjectDrawableAssist> assists,
+      ui.Offset position,
+      double rotation,
+      double scale,
+      bool locked}) {
     throw UnimplementedError(
         "This object drawable is only to hold the default value in the PainterControllerValue copyWith method, and must not be used otherwise.");
   }

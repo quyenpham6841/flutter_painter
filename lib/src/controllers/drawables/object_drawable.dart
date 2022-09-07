@@ -54,7 +54,7 @@ abstract class ObjectDrawable extends Drawable {
 
   /// Default constructor for [ObjectDrawable].
   const ObjectDrawable({
-    required this.position,
+    this.position,
     this.rotationAngle = 0,
     double scale = 1,
     this.assists = const <ObjectDrawableAssist>{},
@@ -158,12 +158,12 @@ abstract class ObjectDrawable extends Drawable {
   /// Extending classes must at least have the defined named parameters in their method
   /// implementation, but can add any extra parameters relevant to that class.
   ObjectDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    bool? locked,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    bool locked,
   });
 
   // @override

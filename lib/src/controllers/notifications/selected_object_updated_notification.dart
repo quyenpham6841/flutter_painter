@@ -9,8 +9,8 @@ import 'drawable_notification.dart';
 ///
 /// Use [PainterController.selectedObjectDrawable] if you want to do any operations on the selected object drawable.
 class SelectedObjectDrawableUpdatedNotification
-    extends DrawableNotification<ObjectDrawable?> {
+    extends DrawableNotification<ObjectDrawable> {
   /// Creates a [SelectedObjectDrawableUpdatedNotification] with the given [drawable].
-  SelectedObjectDrawableUpdatedNotification(ObjectDrawable? drawable)
+  SelectedObjectDrawableUpdatedNotification(ObjectDrawable drawable)
       : super(drawable);
 }

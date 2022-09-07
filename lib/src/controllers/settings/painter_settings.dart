@@ -33,11 +33,11 @@ class PainterSettings {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   PainterSettings copyWith({
-    FreeStyleSettings? freeStyle,
-    ObjectSettings? object,
-    TextSettings? text,
-    ShapeSettings? shape,
-    ScaleSettings? scale,
+    FreeStyleSettings freeStyle,
+    ObjectSettings object,
+    TextSettings text,
+    ShapeSettings shape,
+    ScaleSettings scale,
   }) {
     return PainterSettings(
       text: text ?? this.text,

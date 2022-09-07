@@ -11,7 +11,7 @@ class ClearDrawablesAction extends ControllerAction<void, void> {
   ///
   /// This list is initially `null`, and is updated once the action is performed.
   /// It is used by [unperform$] to retrieve the removed drawables.
-  List<Drawable>? _removedDrawables;
+  List<Drawable> _removedDrawables;
 
   /// Creates a [ClearDrawablesAction].
   ClearDrawablesAction();
@@ -54,7 +54,7 @@ class ClearDrawablesAction extends ControllerAction<void, void> {
   /// when all drawables are cleared.
   @protected
   @override
-  ControllerAction? merge$(ControllerAction previousAction) {
+  ControllerAction merge$(ControllerAction previousAction) {
     return this;
   }
 }

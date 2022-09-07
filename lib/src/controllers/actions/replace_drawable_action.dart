@@ -96,7 +96,7 @@ class ReplaceDrawableAction extends ControllerAction<bool, bool> {
   /// Otherwise, the default behavior is used.
   @protected
   @override
-  ControllerAction? merge$(ControllerAction previousAction) {
+  ControllerAction merge$(ControllerAction previousAction) {
     if (previousAction is AddDrawablesAction &&
         previousAction.drawables.last == oldDrawable) {
       return AddDrawablesAction([...previousAction.drawables]

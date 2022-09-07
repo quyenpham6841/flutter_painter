@@ -20,8 +20,8 @@ class TextDrawable extends ObjectDrawable {
   ///
   /// The path will be drawn with the passed [style] if provided.
   TextDrawable({
-    required this.text,
-    required Offset position,
+    this.text,
+    Offset position,
     double rotation = 0,
     double scale = 1,
     this.style = const TextStyle(
@@ -61,15 +61,15 @@ class TextDrawable extends ObjectDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   TextDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    String? text,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    TextStyle? style,
-    bool? locked,
-    TextDirection? direction,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    String text,
+    Offset position,
+    double rotation,
+    double scale,
+    TextStyle style,
+    bool locked,
+    TextDirection direction,
   }) {
     return TextDrawable(
       text: text ?? this.text,

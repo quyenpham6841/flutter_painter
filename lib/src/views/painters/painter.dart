@@ -7,18 +7,18 @@ class Painter extends CustomPainter {
   /// The background drawable to be used as a background.
   ///
   /// If it is `null`, the painter will have a transparent background.
-  final BackgroundDrawable? background;
+  final BackgroundDrawable background;
 
   /// List of drawables to be painted.
   final List<Drawable> drawables;
 
   /// Size that the drawables will be scaled to.
   /// If it is null, the drawables will be drawn without scaling.
-  final Size? scale;
+  final Size scale;
 
   /// Creates a [Painter] that paints the [drawables] onto a background [background].
   const Painter({
-    required this.drawables,
+    this.drawables,
     this.background,
     this.scale,
   });
@@ -30,8 +30,8 @@ class Painter extends CustomPainter {
     final _scale = scale;
 
     // Draw the background if it was provided
-    if (background != null && background!.isNotHidden) {
-      background!.draw(canvas, size);
+    if (background != null && background.isNotHidden) {
+      background.draw(canvas, size);
     }
 
     // If a scale size is being used, save the canvas (with the background), scale it
@@ -65,7 +65,8 @@ class Painter extends CustomPainter {
     if (oldDelegate is! Painter) return true;
 
     // If the background changed, or any of the drawables changed, a repaint is needed
-    return oldDelegate.background != background ||
-        !const ListEquality().equals(oldDelegate.drawables, drawables);
+    return (oldDelegate as Painter).background != background ||
+        !const ListEquality()
+            .equals((oldDelegate as Painter).drawables, drawables);
   }
 }

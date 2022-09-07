@@ -13,9 +13,9 @@ class LineDrawable extends Sized1DDrawable implements ShapeDrawable {
 
   /// Creates a new [LineDrawable] with the given [length] and [paint].
   LineDrawable({
-    Paint? paint,
-    required double length,
-    required Offset position,
+    Paint paint,
+    double length,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -51,14 +51,14 @@ class LineDrawable extends Sized1DDrawable implements ShapeDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   LineDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    double? length,
-    Paint? paint,
-    bool? locked,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    double length,
+    Paint paint,
+    bool locked,
   }) {
     return LineDrawable(
       hidden: hidden ?? this.hidden,

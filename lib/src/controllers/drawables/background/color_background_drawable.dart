@@ -9,7 +9,7 @@ class ColorBackgroundDrawable extends BackgroundDrawable {
   final Color color;
 
   /// Creates a [ColorBackgroundDrawable] to use a color as a background.
-  const ColorBackgroundDrawable({required this.color});
+  const ColorBackgroundDrawable({this.color});
 
   /// Draws the background on the provided [canvas] of size [size].
   @override

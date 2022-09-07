@@ -3,18 +3,18 @@ import '../../controllers/painter_controller.dart';
 
 class PainterControllerWidget extends InheritedWidget {
   const PainterControllerWidget({
-    Key? key,
-    required this.controller,
-    required Widget child,
+    Key key,
+    this.controller,
+    Widget child,
   }) : super(key: key, child: child);
 
   final PainterController controller;
 
   static PainterControllerWidget of(BuildContext context) {
-    final PainterControllerWidget? result =
+    final PainterControllerWidget result =
         context.dependOnInheritedWidgetOfExactType<PainterControllerWidget>();
     assert(result != null, 'No PainterControllerWidget found in context');
-    return result!;
+    return result;
   }
 
   @override

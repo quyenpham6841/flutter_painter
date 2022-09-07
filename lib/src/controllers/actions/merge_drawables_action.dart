@@ -43,7 +43,7 @@ class MergeDrawablesAction extends ControllerAction<void, void> {
     final currentDrawables = List<Drawable>.from(value.drawables);
     final last = currentDrawables.last;
     if (last is! GroupedDrawable) return;
-    final drawables = last.drawables;
+    final drawables = (last as GroupedDrawable).drawables;
     currentDrawables.removeLast();
     currentDrawables.addAll(drawables);
     controller.value = value.copyWith(drawables: currentDrawables);

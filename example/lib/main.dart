@@ -5,12 +5,12 @@ import 'package:flutter_painter/flutter_painter.dart';
 
 import 'dart:ui' as ui;
 
-import 'package:phosphor_flutter/phosphor_flutter.dart';
+// import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 }
 
 class FlutterPainterExample extends StatefulWidget {
-  const FlutterPainterExample({Key? key}) : super(key: key);
+  const FlutterPainterExample({Key key}) : super(key: key);
 
   @override
   _FlutterPainterExampleState createState() => _FlutterPainterExampleState();
@@ -37,8 +37,8 @@ class FlutterPainterExample extends StatefulWidget {
 class _FlutterPainterExampleState extends State<FlutterPainterExample> {
   static const Color red = Color(0xFFFF0000);
   FocusNode textFocusNode = FocusNode();
-  late PainterController controller;
-  ui.Image? backgroundImage;
+  PainterController controller;
+  ui.Image backgroundImage;
   Paint shapePaint = Paint()
     ..strokeWidth = 5
     ..color = Colors.red
@@ -135,7 +135,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     // Delete the selected drawable
                     IconButton(
                       icon: const Icon(
-                        PhosphorIcons.trash,
+                        Icons.clear_rounded,
                       ),
                       onPressed: controller.selectedObjectDrawable == null
                           ? null
@@ -154,14 +154,14 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     // Redo action
                     IconButton(
                       icon: const Icon(
-                        PhosphorIcons.arrowClockwise,
+                        Icons.lock_clock,
                       ),
                       onPressed: controller.canRedo ? redo : null,
                     ),
                     // Undo action
                     IconButton(
                       icon: const Icon(
-                        PhosphorIcons.arrowCounterClockwise,
+                        Icons.ac_unit,
                       ),
                       onPressed: controller.canUndo ? undo : null,
                     ),
@@ -172,7 +172,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
         // Generate image
         floatingActionButton: FloatingActionButton(
           child: const Icon(
-            PhosphorIcons.imageFill,
+            Icons.ac_unit,
           ),
           onPressed: renderAndDisplayImage,
         ),
@@ -183,8 +183,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               Positioned.fill(
                 child: Center(
                   child: AspectRatio(
-                    aspectRatio:
-                        backgroundImage!.width / backgroundImage!.height,
+                    aspectRatio: backgroundImage.width / backgroundImage.height,
                     child: FlutterPainter(
                       controller: controller,
                     ),
@@ -396,7 +395,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Free-style eraser
               IconButton(
                 icon: Icon(
-                  PhosphorIcons.eraser,
+                  Icons.clean_hands,
                   color: controller.freeStyleMode == FreeStyleMode.erase
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -406,7 +405,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Free-style drawing
               IconButton(
                 icon: Icon(
-                  PhosphorIcons.scribbleLoop,
+                  Icons.clean_hands,
                   color: controller.freeStyleMode == FreeStyleMode.draw
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -416,7 +415,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Add text
               IconButton(
                 icon: Icon(
-                  PhosphorIcons.textT,
+                  Icons.ac_unit,
                   color: textFocusNode.hasFocus
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -426,13 +425,13 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Add sticker image
               IconButton(
                 icon: const Icon(
-                  PhosphorIcons.sticker,
+                  Icons.ac_unit,
                 ),
                 onPressed: addSticker,
               ),
               // Add shapes
               if (controller.shapeFactory == null)
-                PopupMenuButton<ShapeFactory?>(
+                PopupMenuButton<ShapeFactory>(
                   tooltip: "Add shape",
                   itemBuilder: (context) => <ShapeFactory, String>{
                     LineFactory(): "Line",
@@ -484,15 +483,15 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
     return buildDefault(context);
   }
 
-  static IconData getShapeIcon(ShapeFactory? shapeFactory) {
-    if (shapeFactory is LineFactory) return PhosphorIcons.lineSegment;
-    if (shapeFactory is ArrowFactory) return PhosphorIcons.arrowUpRight;
+  static IconData getShapeIcon(ShapeFactory shapeFactory) {
+    if (shapeFactory is LineFactory) return Icons.clean_hands;
+    if (shapeFactory is ArrowFactory) return Icons.clean_hands;
     if (shapeFactory is DoubleArrowFactory) {
-      return PhosphorIcons.arrowsHorizontal;
+      return Icons.clean_hands;
     }
-    if (shapeFactory is RectangleFactory) return PhosphorIcons.rectangle;
-    if (shapeFactory is OvalFactory) return PhosphorIcons.circle;
-    return PhosphorIcons.polygon;
+    if (shapeFactory is RectangleFactory) return Icons.clean_hands;
+    if (shapeFactory is OvalFactory) return Icons.circle;
+    return Icons.clean_hands;
   }
 
   void undo() {
@@ -562,20 +561,20 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
         .copyWith(color: HSVColor.fromAHSV(1, hue, 1, 1).toColor());
   }
 
-  void selectShape(ShapeFactory? factory) {
+  void selectShape(ShapeFactory factory) {
     controller.shapeFactory = factory;
   }
 
   void renderAndDisplayImage() {
     if (backgroundImage == null) return;
     final backgroundImageSize = Size(
-        backgroundImage!.width.toDouble(), backgroundImage!.height.toDouble());
+        backgroundImage.width.toDouble(), backgroundImage.height.toDouble());
 
     // Render the image
     // Returns a [ui.Image] object, convert to to byte data and then to Uint8List
     final imageFuture = controller
         .renderImage(backgroundImageSize)
-        .then<Uint8List?>((ui.Image image) => image.pngBytes);
+        .then<Uint8List>((ui.Image image) => image.pngBytes);
 
     // From here, you can write the PNG image data a file or do whatever you want with it
     // For example:
@@ -600,35 +599,33 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
     final imageDrawable = controller.selectedObjectDrawable;
     if (imageDrawable is! ImageDrawable) return;
 
-    controller.replaceDrawable(
-        imageDrawable, imageDrawable.copyWith(flipped: !imageDrawable.flipped));
+    controller.replaceDrawable(imageDrawable, imageDrawable);
   }
 }
 
 class RenderedImageDialog extends StatelessWidget {
-  final Future<Uint8List?> imageFuture;
+  final Future<Uint8List> imageFuture;
 
-  const RenderedImageDialog({Key? key, required this.imageFuture})
-      : super(key: key);
+  const RenderedImageDialog({Key key, this.imageFuture}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text("Rendered Image"),
-      content: FutureBuilder<Uint8List?>(
+      content: FutureBuilder<Uint8List>(
         future: imageFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const SizedBox(
               height: 50,
-              child: Center(child: CircularProgressIndicator.adaptive()),
+              child: Center(child: CircularProgressIndicator()),
             );
           }
           if (!snapshot.hasData || snapshot.data == null) {
             return const SizedBox();
           }
           return InteractiveViewer(
-              maxScale: 10, child: Image.memory(snapshot.data!));
+              maxScale: 10, child: Image.memory(snapshot.data));
         },
       ),
     );
@@ -638,7 +635,7 @@ class RenderedImageDialog extends StatelessWidget {
 class SelectStickerImageDialog extends StatelessWidget {
   final List<String> imagesLinks;
 
-  const SelectStickerImageDialog({Key? key, this.imagesLinks = const []})
+  const SelectStickerImageDialog({Key key, this.imagesLinks = const []})
       : super(key: key);
 
   @override

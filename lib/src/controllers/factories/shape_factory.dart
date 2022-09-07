@@ -9,5 +9,5 @@ abstract class ShapeFactory<T extends ShapeDrawable> {
 
   /// Creates the desired shape drawable.
   /// Inheriting classes must override this method to create the appropriate [ShapeDrawable].
-  T create(Offset position, [Paint? paint]);
+  T create(Offset position, [Paint paint]);
 }

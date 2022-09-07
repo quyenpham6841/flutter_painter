@@ -52,9 +52,9 @@ class ObjectSettings {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   ObjectSettings copyWith({
-    ObjectLayoutAssistSettings? layoutAssist,
-    ObjectEnlargeControlsResolver? enlargeControlsResolver,
-    ObjectShowScaleRotationControlsResolver? showScaleRotationControlsResolver,
+    ObjectLayoutAssistSettings layoutAssist,
+    ObjectEnlargeControlsResolver enlargeControlsResolver,
+    ObjectShowScaleRotationControlsResolver showScaleRotationControlsResolver,
   }) {
     return ObjectSettings(
       layoutAssist: layoutAssist ?? this.layoutAssist,
@@ -137,12 +137,12 @@ class ObjectLayoutAssistSettings {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   ObjectLayoutAssistSettings copyWith({
-    bool? enabled,
-    HapticFeedbackSettings? hapticFeedback,
-    double? positionalEnterDistance,
-    double? positionalExitDistance,
-    double? rotationalEnterAngle,
-    double? rotationalExitAngle,
+    bool enabled,
+    HapticFeedbackSettings hapticFeedback,
+    double positionalEnterDistance,
+    double positionalExitDistance,
+    double rotationalEnterAngle,
+    double rotationalExitAngle,
   }) {
     return ObjectLayoutAssistSettings(
       enabled: enabled ?? this.enabled,

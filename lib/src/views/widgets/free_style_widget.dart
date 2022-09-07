@@ -7,8 +7,8 @@ class _FreeStyleWidget extends StatefulWidget {
 
   /// Creates a [_FreeStyleWidget] with the given [controller], [child] widget.
   const _FreeStyleWidget({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class _FreeStyleWidget extends StatefulWidget {
 /// State class
 class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
   /// The current drawable being drawn.
-  PathDrawable? drawable;
+  PathDrawable drawable;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
     if (this.drawable != null) return;
 
     // Create a new free-style drawable representing the current drawing
-    final PathDrawable drawable;
+    PathDrawable drawable;
     if (settings.mode == FreeStyleMode.draw) {
       drawable = FreeStyleDrawable(
         path: [_globalToLocal(globalPosition)],
@@ -120,9 +120,9 @@ class _FreeStyleWidgetState extends State<_FreeStyleWidget> {
 /// A custom recognizer that recognize at most only one gesture sequence.
 class _DragGestureDetector extends OneSequenceGestureRecognizer {
   _DragGestureDetector({
-    required this.onHorizontalDragDown,
-    required this.onHorizontalDragUpdate,
-    required this.onHorizontalDragUp,
+    this.onHorizontalDragDown,
+    this.onHorizontalDragUpdate,
+    this.onHorizontalDragUp,
   });
 
   final ValueSetter<Offset> onHorizontalDragDown;

@@ -14,7 +14,7 @@ abstract class PathDrawable extends Drawable {
   ///
   /// The path will be drawn with the passed [strokeWidth] if provided.
   PathDrawable({
-    required this.path,
+    this.path,
     this.strokeWidth = 1,
     bool hidden = false,
   })  :
@@ -28,9 +28,9 @@ abstract class PathDrawable extends Drawable {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   PathDrawable copyWith({
-    bool? hidden,
-    List<Offset>? path,
-    double? strokeWidth,
+    bool hidden,
+    List<Offset> path,
+    double strokeWidth,
   });
 
   @protected

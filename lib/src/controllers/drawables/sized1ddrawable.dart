@@ -13,8 +13,8 @@ abstract class Sized1DDrawable extends ObjectDrawable {
 
   /// Creates a new [Sized1DDrawable] with the given [length] and [padding].
   const Sized1DDrawable({
-    required this.length,
-    required Offset position,
+    this.length,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -41,13 +41,13 @@ abstract class Sized1DDrawable extends ObjectDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   Sized1DDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    double? length,
-    bool? locked,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    double length,
+    bool locked,
   });
 
   /// Calculates the size of the rendered object.

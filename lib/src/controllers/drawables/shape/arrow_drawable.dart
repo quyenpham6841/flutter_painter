@@ -15,14 +15,14 @@ class ArrowDrawable extends Sized1DDrawable implements ShapeDrawable {
   /// The size of the arrow head.
   ///
   /// If null, the arrow head size will be 3 times the [paint] strokeWidth.
-  double? arrowHeadSize;
+  double arrowHeadSize;
 
   /// Creates a new [ArrowDrawable] with the given [length], [paint] and [arrowHeadSize].
   ArrowDrawable({
-    Paint? paint,
+    Paint paint,
     this.arrowHeadSize,
-    required double length,
-    required Offset position,
+    double length,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -83,15 +83,15 @@ class ArrowDrawable extends Sized1DDrawable implements ShapeDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   ArrowDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    double? length,
-    Paint? paint,
-    bool? locked,
-    double? arrowHeadSize,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    double length,
+    Paint paint,
+    bool locked,
+    double arrowHeadSize,
   }) {
     return ArrowDrawable(
       hidden: hidden ?? this.hidden,

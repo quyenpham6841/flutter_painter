@@ -13,7 +13,7 @@ extension PainterControllerHelper on PainterController {
   PainterSettings get settings => value.settings;
 
   /// The current background drawable directly from `value`.
-  BackgroundDrawable? get background => value.background;
+  BackgroundDrawable get background => value.background;
 
   /// The unmodifiable list of drawables directly from `value`.
   List<Drawable> get drawables => value.drawables;
@@ -48,7 +48,7 @@ extension PainterControllerHelper on PainterController {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this value should only be set between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  set background(BackgroundDrawable? background) => value = value.copyWith(
+  set background(BackgroundDrawable background) => value = value.copyWith(
         background: background,
       );
 
@@ -125,7 +125,7 @@ extension PainterControllerHelper on PainterController {
   TextStyle get textStyle => value.settings.text.textStyle;
 
   /// The focus node used to edit text drawables text from `value.settings.text` directly.
-  FocusNode? get textFocusNode => value.settings.text.focusNode;
+  FocusNode get textFocusNode => value.settings.text.focusNode;
 
   /// The free-style painting mode from `value.settings.freeStyle` directly.
   FreeStyleMode get freeStyleMode => value.settings.freeStyle.mode;
@@ -137,13 +137,13 @@ extension PainterControllerHelper on PainterController {
   Color get freeStyleColor => value.settings.freeStyle.color;
 
   /// The paint used to draw shapes from `value.settings.shape` directly.
-  Paint? get shapePaint => value.settings.shape.paint;
+  Paint get shapePaint => value.settings.shape.paint;
 
   /// Whether to draw shapes once or continuously from `value.settings.shape` directly.
   bool get drawShapeOnce => value.settings.shape.drawOnce;
 
   /// The factory for the shape to be drawn from `value.settings.shape` directly.
-  ShapeFactory? get shapeFactory => value.settings.shape.factory;
+  ShapeFactory get shapeFactory => value.settings.shape.factory;
 
   /// The minimum scale that the user can "zoom out" to from `value.settings.scale` directly.
   double get minScale => value.settings.scale.minScale;
@@ -212,7 +212,7 @@ extension PainterControllerHelper on PainterController {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this value should only be set between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  set textFocusNode(FocusNode? focusNode) => value = value.copyWith(
+  set textFocusNode(FocusNode focusNode) => value = value.copyWith(
       settings: value.settings
           .copyWith(text: value.settings.text.copyWith(focusNode: focusNode)));
 
@@ -258,7 +258,7 @@ extension PainterControllerHelper on PainterController {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this value should only be set between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  set shapePaint(Paint? paint) => value = value.copyWith(
+  set shapePaint(Paint paint) => value = value.copyWith(
           settings: value.settings.copyWith(
               shape: value.settings.shape.copyWith(
         paint: paint,
@@ -282,7 +282,7 @@ extension PainterControllerHelper on PainterController {
   /// that they need to update (it calls [notifyListeners]). For this reason,
   /// this value should only be set between frames, e.g. in response to user
   /// actions, not during the build, layout, or paint phases.
-  set shapeFactory(ShapeFactory? factory) => value = value.copyWith(
+  set shapeFactory(ShapeFactory factory) => value = value.copyWith(
           settings: value.settings.copyWith(
               shape: value.settings.shape.copyWith(
         factory: factory,

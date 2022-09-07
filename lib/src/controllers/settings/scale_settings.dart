@@ -27,9 +27,9 @@ class ScaleSettings {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   ScaleSettings copyWith({
-    bool? enabled,
-    double? minScale,
-    double? maxScale,
+    bool enabled,
+    double minScale,
+    double maxScale,
   }) {
     return ScaleSettings(
       enabled: enabled ?? this.enabled,

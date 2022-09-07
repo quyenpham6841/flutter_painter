@@ -17,9 +17,9 @@ class RectangleDrawable extends Sized2DDrawable implements ShapeDrawable {
 
   /// Creates a new [RectangleDrawable] with the given [size], [paint] and [borderRadius].
   RectangleDrawable({
-    Paint? paint,
-    required Size size,
-    required Offset position,
+    Paint paint,
+    Size size,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -67,15 +67,15 @@ class RectangleDrawable extends Sized2DDrawable implements ShapeDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   RectangleDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    Size? size,
-    Paint? paint,
-    bool? locked,
-    BorderRadius? borderRadius,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    Size size,
+    Paint paint,
+    bool locked,
+    BorderRadius borderRadius,
   }) {
     return RectangleDrawable(
       hidden: hidden ?? this.hidden,

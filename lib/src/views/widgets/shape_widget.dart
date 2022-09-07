@@ -7,8 +7,8 @@ class _ShapeWidget extends StatefulWidget {
 
   /// Creates a [_ShapeWidget] with the given [controller], [child] widget.
   const _ShapeWidget({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class _ShapeWidget extends StatefulWidget {
 
 class _ShapeWidgetState extends State<_ShapeWidget> {
   /// The shape that is being currently drawn.
-  ShapeDrawable? currentShapeDrawable;
+  ShapeDrawable currentShapeDrawable;
 
   /// Getter for shape settings to simplify code.
   ShapeSettings get settings =>
@@ -37,7 +37,7 @@ class _ShapeWidgetState extends State<_ShapeWidget> {
 
   void onScaleStart(ScaleStartDetails details) {
     final factory = settings.factory;
-    if (factory == null || details.pointerCount > 1) return;
+    // if (factory == null || details.pointerCount > 1) return;
 
     final shapeDrawable =
         factory.create(details.localFocalPoint, settings.paint);

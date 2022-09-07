@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import '../../controllers/events/selected_object_drawable_removed_event.dart';
 import '../../controllers/helpers/renderer_check/renderer_check.dart';
 import '../../controllers/drawables/drawable.dart';
@@ -41,16 +42,16 @@ class FlutterPainter extends StatelessWidget {
   final PainterController controller;
 
   /// Callback when a [Drawable] is created internally in [FlutterPainter].
-  final DrawableCreatedCallback? onDrawableCreated;
+  final DrawableCreatedCallback onDrawableCreated;
 
   /// Callback when a [Drawable] is deleted internally in [FlutterPainter].
-  final DrawableDeletedCallback? onDrawableDeleted;
+  final DrawableDeletedCallback onDrawableDeleted;
 
   /// Callback when the selected [ObjectDrawable] changes.
-  final ValueChanged<ObjectDrawable?>? onSelectedObjectDrawableChanged;
+  final ValueChanged<ObjectDrawable> onSelectedObjectDrawableChanged;
 
   /// Callback when the [PainterSettings] of [PainterController] are updated internally.
-  final ValueChanged<PainterSettings>? onPainterSettingsChanged;
+  final ValueChanged<PainterSettings> onPainterSettingsChanged;
 
   /// The builder used to build this widget.
   ///
@@ -62,8 +63,8 @@ class FlutterPainter extends StatelessWidget {
 
   /// Creates a [FlutterPainter] with the given [controller] and optional callbacks.
   const FlutterPainter(
-      {Key? key,
-      required this.controller,
+      {Key key,
+      this.controller,
       this.onDrawableCreated,
       this.onDrawableDeleted,
       this.onSelectedObjectDrawableChanged,
@@ -76,9 +77,9 @@ class FlutterPainter extends StatelessWidget {
   /// Using this constructor, the [builder] will be called any time the [controller] updates.
   /// It is useful if you want to build UI that automatically rebuilds on updates from [controller].
   const FlutterPainter.builder(
-      {Key? key,
-      required this.controller,
-      required FlutterPainterBuilderCallback builder,
+      {Key key,
+      this.controller,
+      FlutterPainterBuilderCallback builder,
       this.onDrawableCreated,
       this.onDrawableDeleted,
       this.onSelectedObjectDrawableChanged,
@@ -120,21 +121,21 @@ class _FlutterPainterWidget extends StatelessWidget {
   final PainterController controller;
 
   /// Callback when a [Drawable] is created internally in [FlutterPainter].
-  final DrawableCreatedCallback? onDrawableCreated;
+  final DrawableCreatedCallback onDrawableCreated;
 
   /// Callback when a [Drawable] is deleted internally in [FlutterPainter].
-  final DrawableDeletedCallback? onDrawableDeleted;
+  final DrawableDeletedCallback onDrawableDeleted;
 
   /// Callback when the selected [ObjectDrawable] changes.
-  final ValueChanged<ObjectDrawable?>? onSelectedObjectDrawableChanged;
+  final ValueChanged<ObjectDrawable> onSelectedObjectDrawableChanged;
 
   /// Callback when the [PainterSettings] of [PainterController] are updated internally.
-  final ValueChanged<PainterSettings>? onPainterSettingsChanged;
+  final ValueChanged<PainterSettings> onPainterSettingsChanged;
 
   /// Creates a [_FlutterPainterWidget] with the given [controller] and optional callbacks.
   const _FlutterPainterWidget(
-      {Key? key,
-      required this.controller,
+      {Key key,
+      this.controller,
       this.onDrawableCreated,
       this.onDrawableDeleted,
       this.onSelectedObjectDrawableChanged,

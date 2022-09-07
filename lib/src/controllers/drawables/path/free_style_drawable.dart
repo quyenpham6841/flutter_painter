@@ -11,7 +11,7 @@ class FreeStyleDrawable extends PathDrawable {
   ///
   /// The path will be drawn with the passed [color] and [strokeWidth] if provided.
   FreeStyleDrawable({
-    required List<Offset> path,
+    List<Offset> path,
     double strokeWidth = 1,
     this.color = Colors.black,
     bool hidden = false,
@@ -27,10 +27,10 @@ class FreeStyleDrawable extends PathDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   FreeStyleDrawable copyWith({
-    bool? hidden,
-    List<Offset>? path,
-    Color? color,
-    double? strokeWidth,
+    bool hidden,
+    List<Offset> path,
+    Color color,
+    double strokeWidth,
   }) {
     return FreeStyleDrawable(
       path: path ?? this.path,

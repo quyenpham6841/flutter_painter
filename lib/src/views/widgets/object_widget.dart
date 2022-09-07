@@ -12,8 +12,8 @@ class _ObjectWidget extends StatefulWidget {
 
   /// Creates a [_ObjectWidget] with the given [controller], [child] widget.
   const _ObjectWidget({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
     this.interactionEnabled = true,
   }) : super(key: key);
 
@@ -36,7 +36,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
 
   /// The last controller value in the widget tree.
   /// Updated by [didChangeDependencies] and used in [dispose].
-  PainterController? controller;
+  PainterController controller;
 
   /// Calculates the scale for the [InteractiveViewer] in the widget tree, and scales
   double transformationScale = 1;
@@ -84,7 +84,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   };
 
   /// Subscription to the events coming from the controller.
-  StreamSubscription<PainterEvent>? controllerEventSubscription;
+  StreamSubscription<PainterEvent> controllerEventSubscription;
 
   /// Getter for the list of [ObjectDrawable]s in the controller
   /// to make code more readable.
@@ -690,7 +690,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     final center = this.center;
 
     // The angle from [assistAngles] the object's current rotation is close
-    final double? closestAssistAngle;
+    double closestAssistAngle;
 
     // If layout assist is enabled, calculate the positional and rotational assists
     if (settings.layoutAssist.enabled) {
@@ -720,7 +720,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
 
     // Do not display the rotational assist if the user is using less that 2 pointers
     // So, rotational assist lines won't show if the user is only moving the object
-    if (details.pointerCount < 2) assists.remove(ObjectDrawableAssist.rotation);
+    // if (details.pointerCount < 2) assists.remove(ObjectDrawableAssist.rotation);
 
     // Snap the object to the horizontal/vertical center if its is near it
     // and layout assist is enabled
@@ -793,7 +793,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   /// Calculates whether the object entered or exited the rotational assist range.
   ///
   /// Returns the angle the object is closest to if it is inside the assist range.
-  double? calculateRotationalAssist(
+  double calculateRotationalAssist(
       ObjectLayoutAssistSettings settings, int index, double rotation) {
     // Calculates all angles from [assistAngles] in the exit range of rotational assist
     final closeAngles = assistAngles
@@ -834,7 +834,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     final renderBox = PainterController.of(context)
         .painterKey
         .currentContext
-        ?.findRenderObject() as RenderBox?;
+        ?.findRenderObject() as RenderBox;
     final center = renderBox == null
         ? Offset.zero
         : Offset(
@@ -861,7 +861,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     onDrawableScaleStart(
         entry,
         ScaleStartDetails(
-          pointerCount: 2,
+          // pointerCount: 2,
           localFocalPoint: entry.value.position,
         ));
   }
@@ -879,7 +879,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     onDrawableScaleUpdate(
         entry,
         ScaleUpdateDetails(
-          pointerCount: 2,
+          // pointerCount: 2,
           rotation: rotation,
           scale: 1,
           localFocalPoint: entry.value.position,
@@ -902,7 +902,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     onDrawableScaleStart(
         entry,
         ScaleStartDetails(
-          pointerCount: 1,
+          // pointerCount: 1,
           localFocalPoint: entry.value.position,
         ));
   }
@@ -922,7 +922,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     onDrawableScaleUpdate(
         entry,
         ScaleUpdateDetails(
-          pointerCount: 1,
+          // pointerCount: 1,
           rotation: 0,
           scale: scale.clamp(ObjectDrawable.minScale, double.infinity),
           localFocalPoint: entry.value.position,
@@ -945,7 +945,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     onDrawableScaleStart(
         entry,
         ScaleStartDetails(
-          pointerCount: 1,
+          // pointerCount: 1,
           localFocalPoint: entry.value.position,
         ));
   }
@@ -960,14 +960,16 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
     if (drawable is! Sized2DDrawable) return;
 
     final initial = initialScaleDrawables[index];
-    if (initial is! Sized2DDrawable?) return;
+    if (initial is! Sized2DDrawable) return;
 
     if (initial == null) return;
     final vertical = axis == Axis.vertical;
     final length =
         ((vertical ? details.localPosition.dy : details.localPosition.dx) *
             (isReversed ? -1 : 1));
-    final initialLength = vertical ? initial.size.height : initial.size.width;
+    final initialLength = vertical
+        ? (initial as Sized2DDrawable).size.height
+        : (initial as Sized2DDrawable).size.width;
 
     final totalLength = (length / initial.scale + initialLength)
         .clamp(0, double.infinity) as double;
@@ -992,10 +994,10 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
       ..rotateZ(-initial.rotationAngle);
     final position = Offset(rotateOffset[12], rotateOffset[13]);
 
-    final newDrawable = drawable.copyWith(
+    final newDrawable = (drawable as Sized2DDrawable).copyWith(
       size: Size(
-        vertical ? drawable.size.width : totalLength,
-        vertical ? totalLength : drawable.size.height,
+        vertical ? (drawable as Sized2DDrawable).size.width : totalLength,
+        vertical ? totalLength : (drawable as Sized2DDrawable).size.height,
       ),
       position: initial.position + position,
       // scale: scale,
@@ -1040,7 +1042,7 @@ class _ObjectControlBox extends StatelessWidget {
 
   /// Color of control when it is active.
   /// If null is provided, the theme's accent color is used. If there is no theme, [Colors.blue] is used.
-  final Color? activeColor;
+  final Color activeColor;
 
   /// Color of the shadow surrounding the control.
   /// Defaults to [Colors.black].
@@ -1050,7 +1052,7 @@ class _ObjectControlBox extends StatelessWidget {
   ///
   /// By default, it will be a [BoxShape.rectangle] shape and not active.
   const _ObjectControlBox({
-    Key? key,
+    Key key,
     this.shape = BoxShape.rectangle,
     this.active = false,
     this.inactiveColor = Colors.white,
@@ -1060,10 +1062,10 @@ class _ObjectControlBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData? theme = Theme.of(context);
+    ThemeData theme = Theme.of(context);
     if (theme == ThemeData.fallback()) theme = null;
     final activeColor =
-        this.activeColor ?? theme?.colorScheme.secondary ?? Colors.blue;
+        this.activeColor ?? theme.colorScheme.secondary ?? Colors.blue;
     return AnimatedContainer(
       duration: _ObjectWidgetState.controlsTransitionDuration,
       decoration: BoxDecoration(

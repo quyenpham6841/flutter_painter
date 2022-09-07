@@ -5,8 +5,8 @@ import 'drawable_notification.dart';
 ///
 /// This means that if the object drawable is selected and it is tapped/clicked on, this notification is dispatched.
 class ObjectDrawableReselectedNotification
-    extends DrawableNotification<ObjectDrawable?> {
+    extends DrawableNotification<ObjectDrawable> {
   /// Creates a [ObjectDrawableReselectedNotification] with the given [drawable].
-  ObjectDrawableReselectedNotification(ObjectDrawable? drawable)
+  ObjectDrawableReselectedNotification(ObjectDrawable drawable)
       : super(drawable);
 }

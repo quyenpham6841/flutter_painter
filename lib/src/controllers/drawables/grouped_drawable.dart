@@ -8,7 +8,7 @@ class GroupedDrawable extends Drawable {
 
   /// Creates a new [GroupedDrawable] with the list of [drawables].
   GroupedDrawable({
-    required List<Drawable> drawables,
+    List<Drawable> drawables,
     bool hidden = false,
   })  : drawables = List.unmodifiable(drawables),
         super(hidden: hidden);

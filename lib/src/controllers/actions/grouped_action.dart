@@ -6,7 +6,7 @@ import 'action.dart';
 /// An action consisting of multiple actions grouped into one.
 class GroupedAction extends ControllerAction<void, void> {
   /// The list of actions that comprise this action group.
-  late final List<ControllerAction> actions;
+  List<ControllerAction> actions;
 
   /// Creates a [GroupedAction] with the list of [actions].
   GroupedAction(this.actions);
@@ -20,8 +20,8 @@ class GroupedAction extends ControllerAction<void, void> {
       return;
     }
 
-    final List<ControllerAction> previousActions, currentActions;
-    final ControllerAction? previousAction, currentAction;
+    List<ControllerAction> previousActions, currentActions;
+    ControllerAction previousAction, currentAction;
     if (action1 is GroupedAction) {
       if (action1.actions.isEmpty) {
         previousActions = [];
@@ -49,7 +49,7 @@ class GroupedAction extends ControllerAction<void, void> {
       currentAction = action2;
     }
 
-    final ControllerAction? merged;
+    ControllerAction merged;
     if (previousAction != null && currentAction != null) {
       merged = currentAction.merge(previousAction);
     } else if (previousAction != null) {
@@ -96,7 +96,7 @@ class GroupedAction extends ControllerAction<void, void> {
   /// Similar to [GroupedAction.from], this tries to merge in the most efficient way.
   @protected
   @override
-  ControllerAction? merge$(ControllerAction previousAction) {
+  ControllerAction merge$(ControllerAction previousAction) {
     if (actions.isEmpty) return previousAction;
     ControllerAction toMerge;
     List<ControllerAction> beforeMerge;

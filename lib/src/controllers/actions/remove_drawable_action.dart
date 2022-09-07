@@ -16,7 +16,7 @@ class RemoveDrawableAction extends ControllerAction<bool, bool> {
   ///
   /// This value is initially `null`, and is updated once the action is performed.
   /// It is used by [unperform$] to re-insert the [drawable] at the index it was removed from.
-  int? _removedIndex;
+  int _removedIndex;
 
   /// Creates a [RemoveDrawableAction] with the [drawable] to be removed.
   RemoveDrawableAction(this.drawable);
@@ -74,7 +74,7 @@ class RemoveDrawableAction extends ControllerAction<bool, bool> {
   /// cancels their effects, so `null` is returned. Otherwise, the default behavior is used.
   @protected
   @override
-  ControllerAction? merge$(ControllerAction previousAction) {
+  ControllerAction merge$(ControllerAction previousAction) {
     if (previousAction is AddDrawablesAction &&
         previousAction.drawables.length == 1 &&
         previousAction.drawables.first == drawable) return null;

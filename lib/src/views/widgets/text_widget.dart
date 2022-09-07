@@ -7,8 +7,8 @@ class _TextWidget extends StatefulWidget {
 
   /// Creates a [_TextWidget] with the given [controller] and [child] widget.
   const _TextWidget({
-    Key? key,
-    required this.child,
+    Key key,
+    this.child,
   }) : super(key: key);
 
   @override
@@ -17,12 +17,12 @@ class _TextWidget extends StatefulWidget {
 
 class _TextWidgetState extends State<_TextWidget> {
   /// The currently selected text drawable that is being edited.
-  TextDrawable? selectedDrawable;
+  TextDrawable selectedDrawable;
 
   /// Subscription to the events coming from the controller.
   ///
   /// This is used to listen to new text events to create new text drawables.
-  StreamSubscription<PainterEvent>? controllerEventSubscription;
+  StreamSubscription<PainterEvent> controllerEventSubscription;
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _TextWidgetState extends State<_TextWidget> {
     final renderBox = PainterController.of(context)
         .painterKey
         .currentContext
-        ?.findRenderObject() as RenderBox?;
+        ?.findRenderObject() as RenderBox;
     final center = renderBox == null
         ? Offset.zero
         : Offset(
@@ -152,9 +152,9 @@ class EditTextWidget extends StatefulWidget {
   final bool isNew;
 
   const EditTextWidget({
-    Key? key,
-    required this.controller,
-    required this.drawable,
+    Key key,
+    this.controller,
+    this.drawable,
     this.isNew = false,
   }) : super(key: key);
 
@@ -171,7 +171,7 @@ class EditTextWidgetState extends State<EditTextWidget>
   ///
   /// The node provided from the [TextSettings] will be used if provided
   /// Otherwise, it will be initialized to an inner [FocusNode].
-  late FocusNode textFieldNode;
+  FocusNode textFieldNode;
 
   /// The current bottom view insets (the keyboard size on mobile).
   ///
@@ -231,9 +231,9 @@ class EditTextWidgetState extends State<EditTextWidget>
     final screenHeight = mediaQuery.size.height;
     final keyboardHeight = mediaQuery.viewInsets.bottom;
     final renderBox = widget.controller.painterKey.currentContext
-        ?.findRenderObject() as RenderBox?;
-    final y = renderBox?.localToGlobal(Offset.zero).dy ?? 0;
-    final height = renderBox?.size.height ?? screenHeight;
+        ?.findRenderObject() as RenderBox;
+    final y = renderBox.localToGlobal(Offset.zero).dy ?? 0;
+    final height = renderBox.size.height ?? screenHeight;
 
     return GestureDetector(
       // If the border is tapped, un-focus the text field
@@ -334,9 +334,7 @@ class EditTextWidgetState extends State<EditTextWidget>
   ///
   /// By default, [TextField] shows a character counter if the maxLength attribute
   /// is used. This is to override the counter and display nothing.
-  Widget? buildEmptyCounter(BuildContext context,
-          {required int currentLength,
-          int? maxLength,
-          required bool isFocused}) =>
+  Widget buildEmptyCounter(BuildContext context,
+          {int currentLength, int maxLength, bool isFocused}) =>
       null;
 }

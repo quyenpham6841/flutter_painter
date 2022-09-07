@@ -11,7 +11,7 @@ class ImageBackgroundDrawable extends BackgroundDrawable {
   final Image image;
 
   /// Creates a [ImageBackgroundDrawable] to use an image as a background.
-  const ImageBackgroundDrawable({required this.image});
+  const ImageBackgroundDrawable({this.image});
 
   /// Draws the image on the provided [canvas] of size [size].
   @override

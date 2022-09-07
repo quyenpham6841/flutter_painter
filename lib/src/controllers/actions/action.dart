@@ -63,9 +63,9 @@ abstract class ControllerAction<T, E> {
   ///
   /// Both [this] and [previousAction] must be performed before merging.
   /// If not, throws a [NotPerformedError].
-  ControllerAction? merge(ControllerAction previousAction) {
+  ControllerAction merge(ControllerAction previousAction) {
     if (!_performed || !previousAction._performed) throw NotPerformedError();
-    return merge$(previousAction)?.._performed = true;
+    return merge$(previousAction).._performed = true;
   }
 
   /// Merges [this] action and the [previousAction] into one action.
@@ -76,7 +76,7 @@ abstract class ControllerAction<T, E> {
   ///
   /// By default, it creates a [GroupedAction] from the two actions.
   @protected
-  ControllerAction? merge$(ControllerAction previousAction) {
+  ControllerAction merge$(ControllerAction previousAction) {
     return GroupedAction.from(previousAction, this);
   }
 }
@@ -84,7 +84,7 @@ abstract class ControllerAction<T, E> {
 /// An error that might occur while performing or un-performing [ControllerAction]s.
 abstract class ControllerActionError extends Error {
   /// The message of the error.
-  String? message;
+  String message;
 
   /// Creates a [ControllerActionError] with an optional [message].
   ControllerActionError([this.message]);

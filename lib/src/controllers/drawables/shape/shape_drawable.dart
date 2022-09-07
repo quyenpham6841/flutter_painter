@@ -16,8 +16,8 @@ abstract class ShapeDrawable extends ObjectDrawable {
 
   /// Default constructor for [ObjectDrawable].
   ShapeDrawable({
-    Paint? paint,
-    required Offset position,
+    Paint paint,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -38,12 +38,12 @@ abstract class ShapeDrawable extends ObjectDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   ShapeDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    Paint? paint,
-    bool? locked,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    Paint paint,
+    bool locked,
   });
 }

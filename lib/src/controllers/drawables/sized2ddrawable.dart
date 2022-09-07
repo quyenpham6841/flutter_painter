@@ -10,8 +10,8 @@ abstract class Sized2DDrawable extends ObjectDrawable {
 
   /// Creates a new [Sized2DDrawable] with the given [size] and [painting].
   const Sized2DDrawable({
-    required this.size,
-    required Offset position,
+    this.size,
+    Offset position,
     double rotationAngle = 0,
     double scale = 1,
     Set<ObjectDrawableAssist> assists = const <ObjectDrawableAssist>{},
@@ -38,13 +38,13 @@ abstract class Sized2DDrawable extends ObjectDrawable {
   /// Creates a copy of this but with the given fields replaced with the new values.
   @override
   Sized2DDrawable copyWith({
-    bool? hidden,
-    Set<ObjectDrawableAssist>? assists,
-    Offset? position,
-    double? rotation,
-    double? scale,
-    Size? size,
-    bool? locked,
+    bool hidden,
+    Set<ObjectDrawableAssist> assists,
+    Offset position,
+    double rotation,
+    double scale,
+    Size size,
+    bool locked,
   });
 
   /// Calculates the size of the rendered object.

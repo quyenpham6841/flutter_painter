@@ -6,20 +6,20 @@ import '../controllers/helpers/renderer_check/renderer_check.dart';
 extension PaintCopy on Paint {
   /// Creates a copy of this but with the given fields replaced with the new values.
   Paint copyWith({
-    BlendMode? blendMode,
-    Color? color,
-    ColorFilter? colorFilter,
-    FilterQuality? filterQuality,
-    ImageFilter? imageFilter,
-    bool? invertColors,
-    bool? isAntiAlias,
-    MaskFilter? maskFilter,
-    Shader? shader,
-    StrokeCap? strokeCap,
-    StrokeJoin? strokeJoin,
-    double? strokeMiterLimit,
-    double? strokeWidth,
-    PaintingStyle? style,
+    BlendMode blendMode,
+    Color color,
+    ColorFilter colorFilter,
+    FilterQuality filterQuality,
+    ImageFilter imageFilter,
+    bool invertColors,
+    bool isAntiAlias,
+    MaskFilter maskFilter,
+    Shader shader,
+    StrokeCap strokeCap,
+    StrokeJoin strokeJoin,
+    double strokeMiterLimit,
+    double strokeWidth,
+    PaintingStyle style,
   }) {
     var paint = Paint()
       ..blendMode = blendMode ?? this.blendMode

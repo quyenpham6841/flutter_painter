@@ -6,7 +6,7 @@ import '../factories/shape_factory.dart';
 class ShapeSettings {
   /// A factory for the shape in the UI.
   /// If this is not null, whenever the user drags on the UI, a shape from the factory is drawn.
-  final ShapeFactory? factory;
+  final ShapeFactory factory;
 
   /// If the shape should be drawn once or continuously.
   /// If `true`, after the shape is drawn, the [factory] will be set back to `null`.
@@ -15,7 +15,7 @@ class ShapeSettings {
 
   /// The paint to be used when new shapes are drawn.
   /// If `null`, the [ShapeDrawable.defaultPaint] will be used.
-  final Paint? paint;
+  final Paint paint;
 
   /// Creates a new instance of [ShapeSettings] with the given [factory].
   const ShapeSettings({
@@ -26,9 +26,9 @@ class ShapeSettings {
 
   /// Creates a copy of this but with the given fields replaced with the new values.
   ShapeSettings copyWith({
-    ShapeFactory? factory = _NoShapePassedFactory.instance,
-    bool? drawOnce,
-    Paint? paint,
+    ShapeFactory factory = _NoShapePassedFactory.instance,
+    bool drawOnce,
+    Paint paint,
   }) =>
       ShapeSettings(
         factory:
@@ -49,7 +49,7 @@ class _NoShapePassedFactory extends ShapeFactory {
 
   /// Unimplemented implementation of the create method.
   @override
-  ShapeDrawable create(Offset position, [Paint? paint]) {
+  ShapeDrawable create(Offset position, [Paint paint]) {
     throw UnimplementedError();
   }
 }
