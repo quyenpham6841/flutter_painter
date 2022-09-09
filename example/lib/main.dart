@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_painter/flutter_painter.dart';
 
@@ -135,7 +136,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     // Delete the selected drawable
                     IconButton(
                       icon: const Icon(
-                        Icons.clear_rounded,
+                        Icons.cancel,
                       ),
                       onPressed: controller.selectedObjectDrawable == null
                           ? null
@@ -154,14 +155,15 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
                     // Redo action
                     IconButton(
                       icon: const Icon(
-                        Icons.lock_clock,
+                        Icons.redo,
                       ),
                       onPressed: controller.canRedo ? redo : null,
                     ),
                     // Undo action
                     IconButton(
                       icon: const Icon(
-                        Icons.ac_unit,
+                        // Icons.arrowCounterClockwise,
+                        Icons.undo,
                       ),
                       onPressed: controller.canUndo ? undo : null,
                     ),
@@ -171,9 +173,7 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
         ),
         // Generate image
         floatingActionButton: FloatingActionButton(
-          child: const Icon(
-            Icons.ac_unit,
-          ),
+          child: const Icon(Icons.settings_display),
           onPressed: renderAndDisplayImage,
         ),
         body: Stack(
@@ -395,7 +395,8 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Free-style eraser
               IconButton(
                 icon: Icon(
-                  Icons.clean_hands,
+                  // PhosphorIcons.eraser,
+                  Icons.delete,
                   color: controller.freeStyleMode == FreeStyleMode.erase
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -405,7 +406,8 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Free-style drawing
               IconButton(
                 icon: Icon(
-                  Icons.clean_hands,
+                  // PhosphorIcons.scribbleLoop,
+                  Icons.loop,
                   color: controller.freeStyleMode == FreeStyleMode.draw
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -415,7 +417,8 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Add text
               IconButton(
                 icon: Icon(
-                  Icons.ac_unit,
+                  // PhosphorIcons.textT,
+                  Icons.text_format_rounded,
                   color: textFocusNode.hasFocus
                       ? Theme.of(context).colorScheme.secondary
                       : null,
@@ -425,7 +428,8 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
               // Add sticker image
               IconButton(
                 icon: const Icon(
-                  Icons.ac_unit,
+                  // PhosphorIcons.sticker,
+                  Icons.sticky_note_2_rounded,
                 ),
                 onPressed: addSticker,
               ),
@@ -484,14 +488,14 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
   }
 
   static IconData getShapeIcon(ShapeFactory shapeFactory) {
-    if (shapeFactory is LineFactory) return Icons.clean_hands;
-    if (shapeFactory is ArrowFactory) return Icons.clean_hands;
+    if (shapeFactory is LineFactory) return Icons.linear_scale_sharp;
+    if (shapeFactory is ArrowFactory) return Icons.arrow_upward;
     if (shapeFactory is DoubleArrowFactory) {
-      return Icons.clean_hands;
+      return Icons.arrow_right_alt_sharp;
     }
-    if (shapeFactory is RectangleFactory) return Icons.clean_hands;
+    if (shapeFactory is RectangleFactory) return Icons.format_shapes;
     if (shapeFactory is OvalFactory) return Icons.circle;
-    return Icons.clean_hands;
+    return Icons.format_shapes;
   }
 
   void undo() {
@@ -599,7 +603,10 @@ class _FlutterPainterExampleState extends State<FlutterPainterExample> {
     final imageDrawable = controller.selectedObjectDrawable;
     if (imageDrawable is! ImageDrawable) return;
 
-    controller.replaceDrawable(imageDrawable, imageDrawable);
+    controller.replaceDrawable(
+        imageDrawable,
+        (imageDrawable as ImageDrawable)
+            .copyWith(flipped: !(imageDrawable as ImageDrawable).flipped));
   }
 }
 

@@ -38,6 +38,7 @@ class _ShapeWidgetState extends State<_ShapeWidget> {
   void onScaleStart(ScaleStartDetails details) {
     final factory = settings.factory;
     // if (factory == null || details.pointerCount > 1) return;
+    if (factory == null) return;
 
     final shapeDrawable =
         factory.create(details.localFocalPoint, settings.paint);

@@ -133,7 +133,7 @@ class _ObjectWidgetState extends State<_ObjectWidget> {
   void dispose() {
     // Cancel subscription to events from painter controller
     controllerEventSubscription?.cancel();
-    controller?.transformationController.removeListener(onTransformUpdated);
+    controller.transformationController.removeListener(onTransformUpdated);
     super.dispose();
   }
 
