@@ -160,25 +160,27 @@ class _FlutterPainterWidget extends StatelessWidget {
                   maxScale: controller.settings.scale.enabled
                       ? controller.settings.scale.maxScale
                       : 1,
-                  panEnabled: controller.settings.scale.enabled &&
-                      (controller.freeStyleSettings.mode == FreeStyleMode.none),
-                  scaleEnabled: controller.settings.scale.enabled &&
-                      (controller.freeStyleSettings.mode == FreeStyleMode.none),
-                  onInteractionStart: (details) {
-                    controller.freeStyleMode = FreeStyleMode.none;
-                  },
-                  onInteractionEnd: (details) {
-                    switch (currentMode) {
-                      case FreeStyleMode.none:
-                        break;
-                      case FreeStyleMode.draw:
-                        controller.freeStyleMode = FreeStyleMode.draw;
-                        break;
-                      case FreeStyleMode.erase:
-                        controller.freeStyleMode = FreeStyleMode.erase;
-                        break;
-                    }
-                  },
+                  panEnabled: false,
+                  scaleEnabled: false,
+                  // panEnabled: controller.settings.scale.enabled &&
+                  //     (controller.freeStyleSettings.mode == FreeStyleMode.none),
+                  // scaleEnabled: controller.settings.scale.enabled &&
+                  //     (controller.freeStyleSettings.mode == FreeStyleMode.none),
+                  // onInteractionStart: (details) {
+                  //   controller.freeStyleMode = FreeStyleMode.none;
+                  // },
+                  // onInteractionEnd: (details) {
+                  //   switch (currentMode) {
+                  //     case FreeStyleMode.none:
+                  //       break;
+                  //     case FreeStyleMode.draw:
+                  //       controller.freeStyleMode = FreeStyleMode.draw;
+                  //       break;
+                  //     case FreeStyleMode.erase:
+                  //       controller.freeStyleMode = FreeStyleMode.erase;
+                  //       break;
+                  //   }
+                  // },
                   child: _FreeStyleWidget(
                       // controller: controller,
                       child: _TextWidget(
