@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_painter:
+  flutter_painter_non_null_safety:
     path: ../
   # phosphor_flutter: ^1.4.0
 

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_painter/flutter_painter.dart';
+import 'package:flutter_painter_non_null_safety/flutter_painter.dart';
 
 import 'dart:ui' as ui;
 
